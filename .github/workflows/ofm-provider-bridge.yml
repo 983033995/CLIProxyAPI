@@ -1,0 +1,33 @@
+name: OFM Provider Bridge POC
+on:
+  push:
+    branches: [feat/ofm-provider-bridge-poc]
+    paths:
+      - "integrations/ofm-provider-bridge/**"
+      - ".github/workflows/ofm-provider-bridge.yml"
+  pull_request:
+    paths:
+      - "integrations/ofm-provider-bridge/**"
+      - ".github/workflows/ofm-provider-bridge.yml"
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+      - name: Test registry mapping
+        run: python3 -m unittest discover -s integrations/ofm-provider-bridge/tests -v
+      - name: Compile native plugin (Linux amd64 baseline)
+        working-directory: integrations/ofm-provider-bridge/plugin
+        env:
+          CGO_ENABLED: "1"
+          GOAMD64: "v1"
+          CGO_CFLAGS: "-march=x86-64"
+        run: |
+          go build -buildmode=c-shared -o ofm-authorized.so .
+          go version -m ofm-authorized.so
+          nm -D ofm-authorized.so | grep 'cliproxy_plugin_init'
+      - name: Do not deploy on smoke alone
+        run: echo "Only ABI build and generator unit tests; no host integration or production deployment"
