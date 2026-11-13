@@ -1,0 +1,89 @@
+[
+  {
+    "id": "good",
+    "name": "Good provider",
+    "format": "openai-chat",
+    "auth": {
+      "kind": "apiKey"
+    },
+    "baseUrl": "https://api.example.org/v1",
+    "models": [
+      {
+        "id": "org/model",
+        "name": "Nested model",
+        "contextWindow": 128000,
+        "vision": true
+      }
+    ]
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "format": "anthropic-messages",
+    "auth": {
+      "kind": "apiKey"
+    },
+    "baseUrl": "https://api.anthropic.com/v1",
+    "models": [
+      {
+        "id": "claude"
+      }
+    ]
+  },
+  {
+    "id": "vertex",
+    "name": "Vertex",
+    "format": "openai-chat",
+    "auth": {
+      "kind": "adc"
+    },
+    "baseUrl": "https://example.org",
+    "models": [
+      {
+        "id": "model"
+      }
+    ]
+  },
+  {
+    "id": "azure_openai",
+    "name": "Azure",
+    "format": "openai-chat",
+    "auth": {
+      "kind": "apiKey"
+    },
+    "baseUrl": null,
+    "models": [
+      {
+        "id": "deploy"
+      }
+    ]
+  },
+  {
+    "id": "workbuddy",
+    "name": "WorkBuddy",
+    "format": "openai-chat",
+    "auth": {
+      "kind": "apiKey"
+    },
+    "baseUrl": "https://example.org",
+    "models": [
+      {
+        "id": "model"
+      }
+    ]
+  },
+  {
+    "id": "keyless",
+    "name": "local",
+    "format": "openai-chat",
+    "auth": {
+      "kind": "none"
+    },
+    "baseUrl": "http://localhost:11434/v1",
+    "models": [
+      {
+        "id": "model"
+      }
+    ]
+  }
+]
